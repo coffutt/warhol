@@ -1,0 +1,40 @@
+{
+  "name": "warhol",
+  "version": "0.0.0",
+  "description": "Asynchronously update blocks of command line text. ",
+  "homepage": "https://github.com/craig-o/warhol",
+  "author": {
+    "name": "Craig Offutt",
+    "email": "craigoffutt@gmail.com",
+    "url": "https://github.com/craig-o"
+  },
+  "repository": "craig-o/warhol",
+  "license": "MIT",
+  "main": "lib/warhol.js",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "warhol",
+    "command line",
+    "text",
+    "logging",
+    "console"
+  ],
+  "dependencies": {
+    "json-path": "^0.1.3"
+  },
+  "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "load-grunt-tasks": "^1.0.0",
+    "time-grunt": "^1.0.0",
+    "grunt-mocha-cli": "^1.11.0",
+    "jshint-stylish": "^1.0.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  }
+}
