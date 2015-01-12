@@ -22,7 +22,7 @@ var tempData = require('./test-template'),
     lineLength = tempData.maxLineLength;
 
 var warhol = require('../');
-warhol({
+var logger = warhol({
     lines: template,
     model: watchMe
 });
@@ -32,5 +32,9 @@ require('lodash').forEach([1,2,3,4,5,6,7,8],function (i) {
         watchMe.mods[0].percentLoaded = i;
         watchMe.mods[1].percentLoaded = i;
         watchMe.mods[2].percentLoaded = i * 2;
+
+        if (i === 8) {
+            logger.kill();
+        }
     }, i*1000);
 });
