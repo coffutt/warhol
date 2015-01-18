@@ -9,6 +9,8 @@ var tempData = require('./test-template'),
     testWarhol = undefined,
     testFile = __dirname + '/temp-test.txt';
 
+// TODO: Use the mock-console module in order to do some testing...
+throw Error('USE MOCK CONSOLE MODULE!!!')
 (function redirectStdout (path) {
     process.stdout.pipe(fs.createWriteStream(path, { flags: 'a' }));
 })(testFile);
