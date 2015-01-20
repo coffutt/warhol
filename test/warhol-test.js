@@ -2,39 +2,34 @@
 
 var tempData = require('./test-template'),
     expect = require('chai').expect,
-    fs = require('fs'),
-    _ = require('lodash'),
     template = tempData.template,
-    lineLength = tempData.maxLineLength,
-    testWarhol = undefined,
-    testFile = __dirname + '/temp-test.txt';
-
-// TODO: Use the mock-console module in order to do some testing...
-throw Error('USE MOCK CONSOLE MODULE!!!')
-(function redirectStdout (path) {
-    process.stdout.pipe(fs.createWriteStream(path, { flags: 'a' }));
-})(testFile);
+    mockConsole = require('mock-console'),
+    testWarhol = undefined;
 
 describe('warhol', function () {
 
     var testObject = {
-        title: 'Warhol Test',
-        mods: [
-            {
-                name: 'Module 1',
-                percentLoaded: '0'
-            },
-            {
-                name: 'Module 2',
-                percentLoaded: '0'
-            },
-            {
-                name: 'Module 3',
-                percentLoaded: '0'
-            }
-        ]
-    };
+            title: 'Warhol Test',
+            mods: [
+                {
+                    name: 'Module 1',
+                    percentLoaded: '0'
+                },
+                {
+                    name: 'Module 2',
+                    percentLoaded: '0'
+                },
+                {
+                    name: 'Module 3',
+                    percentLoaded: '0'
+                }
+            ]
+        },
+        consoleHolder;
+
     before(function () {
+        consoleHolder = mockConsole(/^\*/, { width: 200, height: 200 });
+
         var warhol = require('../');
 
         testWarhol = warhol({
@@ -43,8 +38,8 @@ describe('warhol', function () {
         });
     });
 
-    after(function (done) {
-        // fs.unlinkSync(testFile);
+    after(function () {
+        consoleHolder.resetStdout();
     });
 
     function testOutput (i) {
@@ -54,8 +49,8 @@ describe('warhol', function () {
                 '* Module 2 ' + i + '%',
                 '* Module 3 ' + i*2 + '%'
             ],
-            expected = lines.join('\n'),
-            actual = fs.readFileSync(testFile).toString('utf8');
+            expected = lines.join('\n') + '\n',
+            actual = consoleHolder.getConsoleOutput();
 
         expect(expected).to.equal(actual);
     }
@@ -84,6 +79,7 @@ describe('warhol', function () {
         testWarhol.kill();
         testObject.mods[0] = testObject.mods[1] = testObject.mods[2] = 100;
         testOutput(3);
+        done();
     });
 
 });
