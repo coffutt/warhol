@@ -1,7 +1,7 @@
 {
   "name": "warhol",
   "version": "0.0.0",
-  "description": "Asynchronously update blocks of command line text. ",
+  "description": "Asynchronously update blocks of command line text by changing a model object.",
   "homepage": "https://github.com/craig-o/warhol",
   "author": {
     "name": "Craig Offutt",
@@ -12,7 +12,8 @@
   "license": "MIT",
   "main": "lib/warhol.js",
   "files": [
-    "lib"
+    "lib",
+    "examples"
   ],
   "keywords": [
     "warhol",
